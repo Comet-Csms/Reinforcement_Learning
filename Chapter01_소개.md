@@ -7,7 +7,7 @@
 ## 1.1 강화학습
 - RL: 주어진 상황(환경(environment), 상태(state), ..)에서 어떤 행동(action)을 취할지를 학습자(agent)가 학습(최대한의 보상(reward)을 얻게 끔)
 - RL 중요한 두 가지 특성: 시행착오(trial and error), 지연된 reward
-- RL 체계화 <- 동적 시스템 이론(불확실한 Markov Decision Process(MDP))
+- RL 체계화 <- 동적 시스템 이론(불확실한 마르코프 결정 과정(Markov Decision Process(MDP)))
 - 가장 간단한 형태의 MDP <감지(detection), action, goal>
 - RL이 갖는 어려운 점: 탐험(exploration)과 활용(exploitation)의 절충
 - RL은 불확실한 주변 environment와 상호작용하는 goal 지향적인 agent에 대한 모든 문제를 고려
@@ -33,7 +33,7 @@
 - value function: 장기적인 관점에서 무엇이 좋은 것인가를 알려줌
   - value: 그 state의 시작점에서부터 일정 시간 동안 agent가 기대할 수 있는 reward의 총량(장기적 관점(long-term))
   - 어떤 결정을 내리고 그 결정을 평가할 때 가장 많이 고려하는 것은 value
-  - value 추정이 RL에서 핵심적 역할
+  - **value 추정이 RL에서 핵심적 역할**
 - environment model: environment의 변화를 모사 - (필수x)
   - 일반적으로, environment가 어떻게 변화해 갈지를 추정할 수 있게 해줌
   - model은 planning을 위해 사용 됨
@@ -43,3 +43,23 @@
   - trial and error을 통해 environment model을 학습하고 동시에 그 model을 사용하여 planning하는 과정을 수행하는 RL 시스템도 존재
 
 ## 1.4 한계와 범위
+- state의 비공식적 정의:
+  - 특정 시각에 environment가 어떤 모습을 하고 있는지에 대한 정보를 agent에게 전달하는 신호
+  - 일반적으로, agent가 사용할 수 있는 environment에 대한 모든 정보
+- state는 policy와 value function의 입력, model의 입력과 출력
+- state를 구성하고 변화시키는 것, 또는 state를 학습하는 것을 다루지 않음
+  - state를 설계하는 것이 아니라, 어떠한 state가 주어지든 상관없이 그 state 정보로부터 agent가 취해야 할 action을 결정하는 것
+- policy의 진화적 방법은 다루지 않음
+
+## 1.5 확장된 예제: 틱택토
+- 무승부, 패배를 똑같이 안좋은 결과라고 가정
+- 미니맥스(minimax) 방법 - 전통적 방법
+  - 상대방의 잘못된 선택 덕분에 특정 상태에 도달하여 그 이후에는 항상 이기는 방법 -> 절대 질 수 없는 상태에는 도달하지 못함
+- 동적 프로그래밍(dynamic programming) - 전통적 최적화 방법(최적해)
+  - 순차적 결정 문제
+  - 상대방에 대한 완벽한 사전 정보 필요(상대방이 게임 판의 상황에 따라 특정 선택을 할 확률이 필요)
+  - 어떤 상대방과 게임을 하더라도 최적의 해결책을 계산할 수 있음
+- 근사적 model + dynamic programming - 최적화 방법(최선해)
+  - 상대방에 대한 사전 정보 제공x
+  - 상대방과 게임을 많이 해 봄으로써 상대방에 대한 사전 정보를 경험으로 추론 -> 상대방의 행동에 대한 근사적 model 학습
+  - 최적의 해결책 계산
